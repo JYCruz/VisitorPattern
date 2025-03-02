@@ -1,38 +1,35 @@
 # Visitor Pattern - Telco Promo System
 
-## Problem Scenario
+Imagine you are looking for a new mobile plan for your smartphone. Three major telecommunication providers are offering enticing deals: Smart, Globe, and Ditto.
 
-Three major telecommunication providers (Smart, Globe, Ditto) offer enticing mobile plans with different features (data allowance, unlimited calls and texts). The task is to implement the Visitor Design Pattern to calculate and display their data allowances and unlimited call/text packages.
+Smart: Offers a data allowance of 15 GB for ₱500 per month. However, they do not offer any free calls or texts, and you will be charged per use.
+Globe: Provides a data allowance of 10 GB for ₱450 per month. This plan comes with unlimited calls and texts to subscribers within their network. Calls and texts to other networks are charged extra.
+Ditto: Offers a data allowance of 8 GB for ₱400 per month. This plan includes unlimited calls and texts to all networks within the country.
+Implement the visitor design pattern based from the given diagram. Refer to this link.  
 
-## UML Diagram
+Test your codes before the given client program:
 
-[Insert UML diagram here]
+public class TelcoPromo {
+  public static void main(String[] args) {
+    TelcoSubscription smart = new Telco(15, 500, Smart,false);
+    TelcoSubscription globe = new Telco(10, 450, Globe,true);
+    TelcoSubscription ditto = new Telco(8, 400, Ditto,true);
 
-## How to Run
+    UsagePromo promo = new TelcoAllowance();
+    UnliCallOffer unli = new UnliCallTextPackage();    
 
-1. Clone the repository.
-2. Compile the Java files.
-3. Run the `TelcoPromo` class to see the output.
+    System.out.println("Smart Data Usage Offer and price: " + promo.showAllowance(smart.getTelcoName(), smart.getPromoPrice()));
+    System.out.println("Globe Data Usage Offer and price" + promo.showAllowance(globe.getTelcoName(), globe.getPromoPrice()));
+    System.out.println("Ditto Data Usage Offer and price" + promo.showAllowance(ditto.getTelcoName(), ditto.getPromoPrice()));
 
-## Solution
+    System.out.println("\nSmart unlimited calls and text package: " +
 
-This solution applies the Visitor Design Pattern to handle different telecom plan offerings. It uses two visitors to display the data usage and unlimited call/text packages for each provider.
+                                  unli.showUnliCallsTextOffer(smart.getTelcoName(), smart.getUnliCallText()));
+    System.out.println("Globe unlimited calls and text package: " +
 
+                                  unli.showUnliCallsTextOffer(globe.getTelcoName(), globe.getUnliCallText()));
+    System.out.println("Ditto unlimited calls and text package: " +
 
-## Problem Scenario
-
-Three major telecommunication providers (Smart, Globe, Ditto) offer enticing mobile plans with different features (data allowance, unlimited calls and texts). The task is to implement the Visitor Design Pattern to calculate and display their data allowances and unlimited call/text packages.
-
-## UML Diagram
-
-[Insert UML diagram here]
-
-## How to Run
-
-1. Clone the repository.
-2. Compile the Java files.
-3. Run the `TelcoPromo` class to see the output.
-
-## Solution
-
-This solution applies the Visitor Design Pattern to handle different telecom plan offerings. It uses two visitors to display the data usage and unlimited call/text packages for each provider.
+                                   unli.showUnliCallsTextOffer(ditto.getTelcoName(), ditto.getUnliCallText()));
+  }
+}
